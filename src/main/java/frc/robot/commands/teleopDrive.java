@@ -9,12 +9,14 @@ import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.Constants.OperatorConstants;
 import frc.robot.subsystems.drivetrain;
 
-public class ExampleCommand extends Command {
+public class teleopDrive extends Command {
   @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
   private final drivetrain m_Drivetrain;
   XboxController m_driverController = new XboxController(OperatorConstants.kDriverControllerPort);
 
-  public ExampleCommand(drivetrain subsystem) {
+  double leftX, leftY, rightX, rightY;
+
+  public teleopDrive(drivetrain subsystem) {
     m_Drivetrain = subsystem;
 
     addRequirements(m_Drivetrain);
@@ -25,7 +27,13 @@ public class ExampleCommand extends Command {
 
   @Override
   public void execute() {
-    m_Drivetrain.setDrivePower(m_driverController.getLeftY(), m_driverController.getRightY());
+    leftY = m_driverController.getLeftY();
+    rightX = m_driverController.getRightX();
+
+    leftY = Math.max(Math.abs(leftY) - OperatorConstants.kDeadZone, 0) * Math.signum(leftY) * (OperatorConstants.kReverseDriveSticks?-1:1); // handles deadzone
+    rightX = Math.max(Math.abs(rightX) - OperatorConstants.kDeadZone, 0) * Math.signum(rightX) * (OperatorConstants.kReverseDriveSticks?-1:1); // handles deadzone
+
+    m_Drivetrain.arcadeDrive(leftY, rightX);
   }
 
   @Override

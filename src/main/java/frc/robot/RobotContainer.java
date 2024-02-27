@@ -6,20 +6,28 @@ package frc.robot;
 
 import frc.robot.Constants.OperatorConstants;
 import frc.robot.commands.Autos;
+import frc.robot.commands.teleopDrive;
 import frc.robot.subsystems.drivetrain;
+import frc.robot.subsystems.launcher;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 
 public class RobotContainer {
   private final drivetrain m_Drivetrain = new drivetrain();
+  private final launcher m_Launcher = new launcher();
 
   private final CommandXboxController m_driverController = new CommandXboxController(OperatorConstants.kDriverControllerPort);
 
   public RobotContainer() {
+    m_Drivetrain.setDefaultCommand(new teleopDrive(m_Drivetrain));
     configureBindings();
   }
 
-  private void configureBindings() {}
+  private void configureBindings() {
+    m_driverController.a().whileTrue(Commands.startEnd(() -> m_Launcher.shootNote(), () -> m_Launcher.stopMotors()));
+    m_driverController.x().whileTrue(Commands.startEnd(() -> m_Launcher.intakeNote(), () -> m_Launcher.stopMotors()));
+  }
 
   public Command getAutonomousCommand() {
     return Autos.exampleAuto(m_Drivetrain);
