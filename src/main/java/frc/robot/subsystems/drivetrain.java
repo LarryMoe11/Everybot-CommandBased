@@ -20,19 +20,24 @@ public class drivetrain extends SubsystemBase {
   CANSparkMax rightFront = new CANSparkMax(MotorConstants.kRightFrontID, MotorType.kBrushless);
 
   public drivetrain() {
-    leftRear.follow(leftFront);
-    rightRear.follow(rightFront);
+    leftRear.follow(leftFront); // tells the rear left motor to have the same output as front left
+    rightRear.follow(rightFront); // tells the rear right motor to have the same output as front right
 
-    leftFront.setInverted(false);
-    rightFront.setInverted(true);
+    leftFront.setInverted(false); // we need to invert one side (default right)
+    rightFront.setInverted(true); // we need to invert one side (default right)
 
-    leftFront.setIdleMode(IdleMode.kBrake);
-    rightFront.setIdleMode(IdleMode.kBrake);
+    leftFront.setIdleMode(IdleMode.kBrake); // make sure drivetrain is in brake mode so robot stops when joystick is released
+    rightFront.setIdleMode(IdleMode.kBrake); // make sure drivetrain is in brake mode so robot stops when joystick is released
   }
 
   public void tankDrive(double leftPower, double rightPower) {
-    leftFront.set(Math.min(Math.abs(leftPower), 1) * Math.signum(leftPower));
-    rightFront.set(Math.min(Math.abs(rightPower), 1) * Math.signum(rightPower));
+    leftFront.set( // sets left motor power
+      Math.min(Math.abs(leftPower), 1) * Math.signum(leftPower) // just ensures power is never set over 1 and under -1
+    );
+
+    rightFront.set( // sets right motor power
+      Math.min(Math.abs(rightPower), 1) * Math.signum(rightPower) // just ensures power is never set over 1 and under -1
+    );
   }
 
   public void arcadeDrive(double forwardPower, double turnPower) {
@@ -41,7 +46,7 @@ public class drivetrain extends SubsystemBase {
 
   @Override
   public void periodic() {
-    SmartDashboard.putNumber("Left Power", leftFront.get());
-    SmartDashboard.putNumber("Right Power", rightFront.get());
+    SmartDashboard.putNumber("Left Power", leftFront.get()); // prints power being set to left motor
+    SmartDashboard.putNumber("Right Power", rightFront.get()); // prints power being set to right motor
   }
 }

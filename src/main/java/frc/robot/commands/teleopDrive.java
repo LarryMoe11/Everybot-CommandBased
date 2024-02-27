@@ -12,7 +12,7 @@ import frc.robot.subsystems.drivetrain;
 public class teleopDrive extends Command {
   @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
   private final drivetrain m_Drivetrain;
-  XboxController m_driverController = new XboxController(OperatorConstants.kDriverControllerPort);
+  XboxController m_driverController = new XboxController(OperatorConstants.kDriverControllerPort); // gets controller on (default) port 0
 
   double leftX, leftY, rightX, rightY;
 
@@ -30,10 +30,10 @@ public class teleopDrive extends Command {
     leftY = m_driverController.getLeftY();
     rightX = m_driverController.getRightX();
 
-    leftY = Math.max(Math.abs(leftY) - OperatorConstants.kDeadZone, 0) * Math.signum(leftY) * (OperatorConstants.kReverseDriveSticks?-1:1); // handles deadzone
-    rightX = Math.max(Math.abs(rightX) - OperatorConstants.kDeadZone, 0) * Math.signum(rightX) * (OperatorConstants.kReverseDriveSticks?-1:1); // handles deadzone
+    leftY = Math.max(Math.abs(leftY) - OperatorConstants.kDeadZone, 0) * Math.signum(leftY) * (OperatorConstants.kReverseDriveSticks?-1:1); // handles joystick deadzone
+    rightX = Math.max(Math.abs(rightX) - OperatorConstants.kDeadZone, 0) * Math.signum(rightX) * (OperatorConstants.kReverseDriveSticks?-1:1); // handles joystick deadzone
 
-    m_Drivetrain.arcadeDrive(leftY, rightX);
+    m_Drivetrain.arcadeDrive(leftY, rightX); // sets control mode to (default) arcade
   }
 
   @Override

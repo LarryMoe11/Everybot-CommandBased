@@ -25,8 +25,8 @@ public class RobotContainer {
   }
 
   private void configureBindings() {
-    m_driverController.a().whileTrue(Commands.startEnd(() -> m_Launcher.shootNote(), () -> m_Launcher.stopMotors()));
-    m_driverController.x().whileTrue(Commands.startEnd(() -> m_Launcher.intakeNote(), () -> m_Launcher.stopMotors()));
+    m_driverController.a().whileTrue(Commands.startEnd(() -> m_Launcher.shootNote(), () -> m_Launcher.stopMotors())); // shoot if "a" is held down
+    m_driverController.x().whileTrue(Commands.startEnd(() -> m_Launcher.intakeNote(), () -> m_Launcher.stopMotors())); // intake if "x" is held down
   }
 
   public Command getAutonomousCommand() {
