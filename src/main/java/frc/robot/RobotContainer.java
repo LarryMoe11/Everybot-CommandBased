@@ -8,6 +8,7 @@ import frc.robot.Constants.MotorConstants;
 import frc.robot.Constants.OperatorConstants;
 import frc.robot.commands.Autos;
 import frc.robot.commands.teleopDrive;
+import frc.robot.subsystems.autonSelector;
 import frc.robot.subsystems.drivetrain;
 import frc.robot.subsystems.launcher;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -16,6 +17,7 @@ import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 
 public class RobotContainer {
   private final drivetrain m_Drivetrain = new drivetrain();
+  private final autonSelector m_AutonSelector = new autonSelector();
   private final launcher m_Launcher = new launcher();
 
   private final CommandXboxController m_driverController = new CommandXboxController(OperatorConstants.kDriverControllerPort);
@@ -33,6 +35,6 @@ public class RobotContainer {
   }
 
   public Command getAutonomousCommand() {
-    return Autos.exampleAuto(m_Drivetrain);
+    return Autos.exampleAuto(m_Drivetrain, m_Launcher, m_AutonSelector);
   }
 }

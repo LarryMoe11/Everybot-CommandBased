@@ -28,7 +28,7 @@ public final class Constants {
     public static final double kShootSpeed = 1000;
 
     public static final double kAmpIntakePower = -0.5;
-    public static final double kAmpOuttakePower = 1;
+    public static final double kAmpOuttakePower = 0.5;
   }
   public static class OperatorConstants {
     public static final int kDriverControllerPort = 0;
