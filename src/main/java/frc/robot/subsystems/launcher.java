@@ -16,6 +16,7 @@ import frc.robot.Constants.MotorConstants;
 public class launcher extends SubsystemBase {
   CANSparkMax launchWheel = new CANSparkMax(MotorConstants.kLaunchWheelID, MotorType.kBrushless); // upper shooter wheel
   CANSparkMax feedWheel = new CANSparkMax(MotorConstants.kFeedWheelID, MotorType.kBrushless); // lower shooter wheel
+  CANSparkMax ampWheel = new CANSparkMax(MotorConstants.kAmpWheelID, MotorType.kBrushless); // amp motor
   SparkPIDController launchWheelPID, feedWheelPID; // just variables for the PID Controllers
 
   Boolean shootState = false; // true if the shooter should be running
@@ -39,6 +40,10 @@ public class launcher extends SubsystemBase {
     feedWheelPID.setIZone(0); // ?
     feedWheelPID.setFF(0.000180); // ?
     feedWheelPID.setOutputRange(-1, 1); // max & min power for .set() command
+  }
+
+  public void setAmpPower(double power) {
+    ampWheel.set(power);
   }
 
   public void intakeNote() {

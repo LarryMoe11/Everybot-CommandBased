@@ -20,11 +20,15 @@ public final class Constants {
     public static final int kLeftFrontID = 2;
     public static final int kRightFrontID = 4;
 
+    public static final int kAmpWheelID = 7;
     public static final int kLaunchWheelID = 6;
     public static final int kFeedWheelID = 5;
 
     public static final double kIntakeSpeed = 500;
     public static final double kShootSpeed = 1000;
+
+    public static final double kAmpIntakePower = -0.5;
+    public static final double kAmpOuttakePower = 1;
   }
   public static class OperatorConstants {
     public static final int kDriverControllerPort = 0;

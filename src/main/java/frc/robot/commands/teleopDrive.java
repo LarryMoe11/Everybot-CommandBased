@@ -28,10 +28,14 @@ public class teleopDrive extends Command {
   @Override
   public void execute() {
     leftY = m_driverController.getLeftY();
+    leftX = m_driverController.getLeftX();
     rightX = m_driverController.getRightX();
+    rightY = m_driverController.getRightY();
 
     leftY = Math.max(Math.abs(leftY) - OperatorConstants.kDeadZone, 0) * Math.signum(leftY) * (OperatorConstants.kReverseDriveSticks?-1:1); // handles joystick deadzone
+    leftX = Math.max(Math.abs(leftX) - OperatorConstants.kDeadZone, 0) * Math.signum(leftX) * (OperatorConstants.kReverseDriveSticks?-1:1); // handles joystick deadzone
     rightX = Math.max(Math.abs(rightX) - OperatorConstants.kDeadZone, 0) * Math.signum(rightX) * (OperatorConstants.kReverseDriveSticks?-1:1); // handles joystick deadzone
+    rightY = Math.max(Math.abs(rightY) - OperatorConstants.kDeadZone, 0) * Math.signum(rightY) * (OperatorConstants.kReverseDriveSticks?-1:1); // handles joystick deadzone
 
     m_Drivetrain.arcadeDrive(leftY, rightX); // sets control mode to (default) arcade
   }

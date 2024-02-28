@@ -4,6 +4,7 @@
 
 package frc.robot;
 
+import frc.robot.Constants.MotorConstants;
 import frc.robot.Constants.OperatorConstants;
 import frc.robot.commands.Autos;
 import frc.robot.commands.teleopDrive;
@@ -27,6 +28,8 @@ public class RobotContainer {
   private void configureBindings() {
     m_driverController.a().whileTrue(Commands.startEnd(() -> m_Launcher.shootNote(), () -> m_Launcher.stopMotors())); // shoot if "a" is held down
     m_driverController.x().whileTrue(Commands.startEnd(() -> m_Launcher.intakeNote(), () -> m_Launcher.stopMotors())); // intake if "x" is held down
+    m_driverController.leftTrigger(0.5).whileTrue(Commands.startEnd(() -> m_Launcher.setAmpPower(MotorConstants.kAmpIntakePower), () -> m_Launcher.setAmpPower(0))); // amp intake if left trigger is held down
+    m_driverController.rightTrigger(0.5).whileTrue(Commands.startEnd(() -> m_Launcher.setAmpPower(MotorConstants.kAmpOuttakePower), () -> m_Launcher.setAmpPower(0))); // amp outtake if right trigger is held down
   }
 
   public Command getAutonomousCommand() {
