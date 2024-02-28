@@ -14,6 +14,7 @@ public class autonSelector extends SubsystemBase {
 
   /** Creates a new autonSelector. */
   public autonSelector() {
+    m_chooser.setDefaultOption(autonChoices[0], autonChoices[0]); // sets default choice to first in choice list
     for (String choice:autonChoices) { m_chooser.addOption(choice, choice); } // add choices to chooser
     SmartDashboard.putData("Auto choices", m_chooser); // post chooser to ShuffleBoard
   }
