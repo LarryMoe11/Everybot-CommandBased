@@ -21,6 +21,7 @@ public class RobotContainer {
   private final launcher m_Launcher = new launcher();
 
   private final CommandXboxController m_driverController = new CommandXboxController(OperatorConstants.kDriverControllerPort);
+  private final CommandXboxController m_operatorController = new CommandXboxController(OperatorConstants.kOperatorControllerPort);
 
   public RobotContainer() {
     m_Drivetrain.setDefaultCommand(new teleopDrive(m_Drivetrain));
@@ -28,10 +29,10 @@ public class RobotContainer {
   }
 
   private void configureBindings() {
-    m_driverController.a().whileTrue(Commands.startEnd(() -> m_Launcher.shootNote(), () -> m_Launcher.stopMotors())); // shoot if "a" is held down
-    m_driverController.x().whileTrue(Commands.startEnd(() -> m_Launcher.intakeNote(), () -> m_Launcher.stopMotors())); // intake if "x" is held down
-    m_driverController.leftTrigger(0.5).whileTrue(Commands.startEnd(() -> m_Launcher.setAmpPower(MotorConstants.kAmpIntakePower), () -> m_Launcher.setAmpPower(0))); // amp intake if left trigger is held down
-    m_driverController.rightTrigger(0.5).whileTrue(Commands.startEnd(() -> m_Launcher.setAmpPower(MotorConstants.kAmpOuttakePower), () -> m_Launcher.setAmpPower(0))); // amp outtake if right trigger is held down
+    m_operatorController.a().whileTrue(Commands.startEnd(() -> m_Launcher.shootNote(), () -> m_Launcher.stopMotors())); // shoot if "a" is held down
+    m_operatorController.x().whileTrue(Commands.startEnd(() -> m_Launcher.intakeNote(), () -> m_Launcher.stopMotors())); // intake if "x" is held down
+    m_operatorController.b().whileTrue(Commands.startEnd(() -> m_Launcher.setAmpPower(MotorConstants.kAmpIntakePower), () -> m_Launcher.setAmpPower(0))); // amp intake if "b" is held down
+    m_operatorController.y().whileTrue(Commands.startEnd(() -> m_Launcher.setAmpPower(MotorConstants.kAmpOuttakePower), () -> m_Launcher.setAmpPower(0))); // amp outtake if "y" is held down
   }
 
   public Command getAutonomousCommand() {

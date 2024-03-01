@@ -58,7 +58,7 @@ public class launcher extends SubsystemBase {
     if (!state) { // if motors arent in use
       state = true; // motors are being used
       shootState = true; // we are trying to shoot
-      launchWheelPID.setReference(MotorConstants.kShootSpeed, ControlType.kVelocity); // set shooter to (default) 1000 RPM
+      launchWheelPID.setReference(MotorConstants.kShootSpeed, ControlType.kVelocity); // set shooter to (default) 5500 RPM
     }
   }
 
@@ -70,9 +70,9 @@ public class launcher extends SubsystemBase {
 
   private void updateShooter() {
     if (shootState) { // if we are trying to shoot
-      if (launchWheel.getEncoder().getVelocity() >= MotorConstants.kShootSpeed - 25) { // if shooter is up to (default) 1000 RPM
-        feedWheelPID.setReference(MotorConstants.kShootSpeed/4, ControlType.kVelocity); // set feed wheel to (default) 250 RPM
-        if (feedWheel.getEncoder().getVelocity() >= (MotorConstants.kShootSpeed/4) - 25) { // if feed wheel is up to (default) 250 RPM
+      if (launchWheel.getEncoder().getVelocity() >= MotorConstants.kShootSpeed - 25) { // if shooter is up to (default) 5475 RPM
+        feedWheelPID.setReference(MotorConstants.kShootSpeed, ControlType.kVelocity); // set feed wheel to (default) 5500 RPM
+        if (feedWheel.getEncoder().getVelocity() >= (MotorConstants.kShootSpeed) - 25) { // if feed wheel is up to (default) 5475 RPM
           shootState = false; // we are done shooting
         }
       }

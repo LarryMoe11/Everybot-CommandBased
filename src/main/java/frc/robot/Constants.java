@@ -25,13 +25,14 @@ public final class Constants {
     public static final int kFeedWheelID = 5;
 
     public static final double kIntakeSpeed = 500;
-    public static final double kShootSpeed = 1000;
+    public static final double kShootSpeed = 5500;
 
     public static final double kAmpIntakePower = -0.5;
     public static final double kAmpOuttakePower = 0.5;
   }
   public static class OperatorConstants {
     public static final int kDriverControllerPort = 0;
+    public static final int kOperatorControllerPort = 1;
     public static final boolean kReverseDriveSticks = true;
     public static final double kDeadZone = 0.1; // joystick deadzone
   }

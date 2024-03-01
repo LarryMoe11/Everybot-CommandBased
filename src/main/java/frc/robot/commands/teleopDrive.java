@@ -37,7 +37,7 @@ public class teleopDrive extends Command {
     rightX = Math.max(Math.abs(rightX) - OperatorConstants.kDeadZone, 0) * Math.signum(rightX) * (OperatorConstants.kReverseDriveSticks?-1:1); // handles joystick deadzone
     rightY = Math.max(Math.abs(rightY) - OperatorConstants.kDeadZone, 0) * Math.signum(rightY) * (OperatorConstants.kReverseDriveSticks?-1:1); // handles joystick deadzone
 
-    m_Drivetrain.arcadeDrive(leftY, rightX); // sets control mode to (default) arcade
+    m_Drivetrain.tankDrive(leftY, rightY); // sets control mode to (default) tank
   }
 
   @Override
